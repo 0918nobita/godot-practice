@@ -12,16 +12,20 @@ var rect = Rect2(
 	y + half_h
 )
 
+var should_flash = false
+var elapsed = 0
+
 func _ready():
 	print("Hello, Godot!")
 
-var elapsed = 0
-
 func _process(delta):
-	var mouse_pos = get_global_mouse_position()
-	elapsed += delta
-
-	if rect.has_point(mouse_pos):
-		material.set_shader_param("flash_modifier", (1 + cos(2 * elapsed)) / 2)
+	if should_flash:
+		elapsed += delta
+		material.set_shader_param("flash_modifier", (1 + sin(2 * elapsed)) / 4)
 	else:
+		elapsed = 0
 		material.set_shader_param("flash_modifier", 0)
+
+func _input(event):
+	if (event is InputEventMouseButton) or (event is InputEventScreenTouch):
+		should_flash = rect.has_point(event.position)
