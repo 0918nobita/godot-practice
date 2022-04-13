@@ -1,22 +1,13 @@
 extends Sprite
 
-var x = position.x
-var y = position.y
-var s = transform.get_scale()
-var half_w = texture.get_width() * s.x / 2
-var half_h = texture.get_height() * s.y / 2
-var rect = Rect2(
-	x - half_w,
-	y - half_h,
-	x + half_w,
-	y + half_h
-)
+var rect
 
 var should_flash = false
 var elapsed = 0
 
 func _ready():
-	print("Hello, Godot!")
+	var size = get_rect().size * transform.get_scale()
+	rect = Rect2(position - size / 2, size)
 
 func _process(delta):
 	if should_flash:
