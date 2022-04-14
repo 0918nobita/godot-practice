@@ -1,6 +1,4 @@
-extends AnimatedSprite
-
-const speed : int = 400
+extends KinematicBody2D
 
 class Direction:
 	var _inner : int
@@ -14,22 +12,34 @@ class Direction:
 var Left := Direction.new(0)
 var Right := Direction.new(1)
 
-var direction := Left
+const speed := 300
+const gravity := 400
 
-onready var screen_size := get_viewport_rect().size
+var direction := Right
+var velocity := Vector2()
+
+onready var majo := $"./Majo" as AnimatedSprite
 
 func _ready() -> void:
 	pass
 
-func _process(delta : float) -> void:
+func _process(_delta : float) -> void:
+	pass
+
+func _physics_process(delta : float) -> void:
+	velocity.y += gravity * delta
+	velocity.x = 0
+
 	if Input.is_action_pressed("ui_left"):
 		if direction.equals(Right):
-			animation = "left"
+			majo.animation = "left"
 			direction = Left
-		position.x = clamp(position.x - delta * speed, 0, screen_size.x)
+		velocity.x -= speed
 
 	if Input.is_action_pressed("ui_right"):
 		if direction.equals(Left):
-			animation = "right"
+			majo.animation = "right"
 			direction = Right
-		position.x = clamp(position.x + delta * speed, 0, screen_size.x)
+		velocity.x += speed
+
+	velocity = move_and_slide(velocity, Vector2(0, -1))
