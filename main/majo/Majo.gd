@@ -1,6 +1,6 @@
 extends AnimatedSprite
 
-const speed = 400
+const speed : int = 400
 
 enum Direction {
 	Left
@@ -9,12 +9,12 @@ enum Direction {
 
 var direction = Direction.Right
 
-onready var screen_size = get_viewport_rect().size
+onready var screen_size := get_viewport_rect().size
 
-func _ready():
+func _ready() -> void:
 	pass
 
-func _process(delta):
+func _process(delta : float) -> void:
 	if Input.is_action_pressed("ui_left"):
 		if direction == Direction.Right:
 			animation = "left"
