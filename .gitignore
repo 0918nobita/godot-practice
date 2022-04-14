@@ -10,9 +10,6 @@ export_presets.cfg
 .mono/
 data_*/
 
-addons/
-libgitapi.dll
-
 *.exe
 *.pck
 *.dmg
