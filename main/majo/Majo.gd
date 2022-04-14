@@ -1,28 +1,35 @@
 extends AnimatedSprite
 
-const speed = 400
+const speed : int = 400
 
-enum Direction {
-	Left
-	Right
-}
+class Direction:
+	var inner : int
 
-var direction = Direction.Right
+	func _init(inner : int):
+		inner = inner
 
-onready var screen_size = get_viewport_rect().size
+	func equals(other : Direction) -> bool:
+		return inner == other.inner
 
-func _ready():
+var Left := Direction.new(0)
+var Right := Direction.new(1)
+
+var direction := Left
+
+onready var screen_size := get_viewport_rect().size
+
+func _ready() -> void:
 	pass
 
-func _process(delta):
+func _process(delta : float) -> void:
 	if Input.is_action_pressed("ui_left"):
-		if direction == Direction.Right:
+		if direction.equals(Right):
 			animation = "left"
-			direction = Direction.Left
+			direction = Left
 		position.x = clamp(position.x - delta * speed, 0, screen_size.x)
 
 	if Input.is_action_pressed("ui_right"):
-		if direction == Direction.Left:
+		if direction.equals(Left):
 			animation = "right"
-			direction = Direction.Right
+			direction = Right
 		position.x = clamp(position.x + delta * speed, 0, screen_size.x)
