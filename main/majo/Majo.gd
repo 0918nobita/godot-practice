@@ -3,12 +3,12 @@ extends AnimatedSprite
 const speed : int = 400
 
 class Direction:
-	var inner: int
+	var inner : int
 
-	func _init(inner):
+	func _init(inner : int):
 		inner = inner
 
-	func equals(other: Direction) -> bool:
+	func equals(other : Direction) -> bool:
 		return inner == other.inner
 
 var Left := Direction.new(0)
