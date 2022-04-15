@@ -15,6 +15,9 @@ extents = Vector2( 128, 16 )
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 192, 32 )
 
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 16, 39.25 )
+
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 4 )
@@ -58,9 +61,6 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 16, 39.25 )
-
 [node name="Main" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
@@ -78,10 +78,9 @@ texture = ExtResource( 3 )
 script = ExtResource( 1 )
 
 [node name="SlideStaticBody" type="StaticBody2D" parent="."]
-position = Vector2( 288, 256 )
+position = Vector2( 416, 336 )
 
 [node name="SlideCollisionShape" type="CollisionShape2D" parent="SlideStaticBody"]
-position = Vector2( 128, 80 )
 rotation = 0.553436
 shape = SubResource( 13 )
 
@@ -93,10 +92,9 @@ margin_right = 141.0
 margin_bottom = 16.0
 
 [node name="FloorStaticBody" type="StaticBody2D" parent="."]
-position = Vector2( 512, 384 )
+position = Vector2( 704, 416 )
 
 [node name="FloorCollisionShape" type="CollisionShape2D" parent="FloorStaticBody"]
-position = Vector2( 192, 32 )
 shape = SubResource( 11 )
 
 [node name="FloorView" type="ColorRect" parent="FloorStaticBody/FloorCollisionShape"]
@@ -106,12 +104,19 @@ margin_top = -32.0
 margin_right = 192.0
 margin_bottom = 32.0
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 336, -96 )
+[node name="MajoRigidBody" type="RigidBody2D" parent="."]
+position = Vector2( 432, -72 )
+mode = 2
+gravity_scale = 10.0
+contacts_reported = 2
+contact_monitor = true
 script = ExtResource( 2 )
 
-[node name="Majo" type="AnimatedSprite" parent="KinematicBody2D"]
-position = Vector2( 32, 40.75 )
+[node name="MajoCollisionShape" type="CollisionShape2D" parent="MajoRigidBody"]
+position = Vector2( 0, -16 )
+shape = SubResource( 12 )
+
+[node name="Majo" type="AnimatedSprite" parent="MajoRigidBody/MajoCollisionShape"]
 scale = Vector2( 2.5, 2.5 )
 frames = SubResource( 4 )
 animation = "right"
@@ -119,6 +124,4 @@ __meta__ = {
 "_editor_description_": "ぴぽや倉庫 キャラクターチップ1 ハロウィンキャラクター"
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( 32, 40.75 )
-shape = SubResource( 12 )
+[connection signal="body_entered" from="MajoRigidBody" to="MajoRigidBody" method="_on_RigidBody2D_body_entered"]

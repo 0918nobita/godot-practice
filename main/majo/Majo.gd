@@ -1,4 +1,5 @@
-extends KinematicBody2D
+extends RigidBody2D
+
 
 class Direction:
 	var _inner : int
@@ -12,41 +13,47 @@ class Direction:
 var Left := Direction.new(0)
 var Right := Direction.new(1)
 
-const speed := 300
-const gravity := 400
+
+const speed := 100
 
 var direction := Right
-var velocity := Vector2()
+var jumping := false
 
-onready var majo := $Majo as AnimatedSprite
+onready var majo := $"MajoCollisionShape/Majo" as AnimatedSprite
+
 
 func continue_walking() -> void:
 	if not majo.playing:
 		majo.playing = true
 
+
 func stop_walking() -> void:
 	if majo.playing:
 		majo.playing = false
 
-func _physics_process(delta : float) -> void:
-	velocity.y += gravity * delta
-	velocity.x = 0
 
+func _physics_process(_delta):
+	var vel = get_linear_velocity()
 	if Input.is_action_pressed("ui_left"):
 		if direction.equals(Right):
 			majo.animation = "left"
 			direction = Left
+		set_linear_velocity(Vector2(-speed, vel.y))
 		continue_walking()
-		velocity.x -= speed
-
 	elif Input.is_action_pressed("ui_right"):
 		if direction.equals(Left):
 			majo.animation = "right"
 			direction = Right
+		set_linear_velocity(Vector2(speed, vel.y))
 		continue_walking()
-		velocity.x += speed
-	
 	else:
 		stop_walking()
 
-	velocity = move_and_slide(velocity, Vector2(0, -1))
+	if Input.is_action_just_pressed("space") and not jumping:
+		linear_velocity = Vector2.ZERO
+		apply_central_impulse(Vector2(0, -400))
+		jumping = true
+
+
+func _on_RigidBody2D_body_entered(_body):
+	jumping = false
