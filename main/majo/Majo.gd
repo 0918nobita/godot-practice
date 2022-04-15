@@ -18,13 +18,15 @@ const gravity := 400
 var direction := Right
 var velocity := Vector2()
 
-onready var majo := $"./Majo" as AnimatedSprite
+onready var majo := $Majo as AnimatedSprite
 
-func _ready() -> void:
-	pass
+func continue_walking() -> void:
+	if not majo.playing:
+		majo.playing = true
 
-func _process(_delta : float) -> void:
-	pass
+func stop_walking() -> void:
+	if majo.playing:
+		majo.playing = false
 
 func _physics_process(delta : float) -> void:
 	velocity.y += gravity * delta
@@ -34,12 +36,17 @@ func _physics_process(delta : float) -> void:
 		if direction.equals(Right):
 			majo.animation = "left"
 			direction = Left
+		continue_walking()
 		velocity.x -= speed
 
-	if Input.is_action_pressed("ui_right"):
+	elif Input.is_action_pressed("ui_right"):
 		if direction.equals(Left):
 			majo.animation = "right"
 			direction = Right
+		continue_walking()
 		velocity.x += speed
+	
+	else:
+		stop_walking()
 
 	velocity = move_and_slide(velocity, Vector2(0, -1))
