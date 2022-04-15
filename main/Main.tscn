@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://main/icon/Icon.gd" type="Script" id=1]
 [ext_resource path="res://main/majo/Majo.gd" type="Script" id=2]
@@ -6,8 +6,11 @@
 [ext_resource path="res://main/majo/majo.png" type="Texture" id=4]
 [ext_resource path="res://main/icon/shadermaterial.tres" type="Material" id=5]
 [ext_resource path="res://main/background.jpg" type="Texture" id=6]
-[ext_resource path="res://main/floor/Floor.gd" type="Script" id=7]
+[ext_resource path="res://main/slide/shadermaterial.tres" type="Material" id=7]
 [ext_resource path="res://main/floor/shadermaterial.tres" type="Material" id=8]
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 128, 16 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 192, 32 )
@@ -74,19 +77,37 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 script = ExtResource( 1 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( 256, 320 )
+[node name="SlideStaticBody" type="StaticBody2D" parent="."]
+position = Vector2( 288, 256 )
 
-[node name="Floor" type="Node2D" parent="StaticBody2D"]
-material = ExtResource( 8 )
-script = ExtResource( 7 )
+[node name="SlideCollisionShape" type="CollisionShape2D" parent="SlideStaticBody"]
+position = Vector2( 128, 80 )
+rotation = 0.553436
+shape = SubResource( 13 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="SlideView" type="ColorRect" parent="SlideStaticBody/SlideCollisionShape"]
+material = ExtResource( 7 )
+margin_left = -128.0
+margin_top = -16.0
+margin_right = 141.0
+margin_bottom = 16.0
+
+[node name="FloorStaticBody" type="StaticBody2D" parent="."]
+position = Vector2( 512, 384 )
+
+[node name="FloorCollisionShape" type="CollisionShape2D" parent="FloorStaticBody"]
 position = Vector2( 192, 32 )
 shape = SubResource( 11 )
 
+[node name="FloorView" type="ColorRect" parent="FloorStaticBody/FloorCollisionShape"]
+material = ExtResource( 8 )
+margin_left = -192.0
+margin_top = -32.0
+margin_right = 192.0
+margin_bottom = 32.0
+
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 416, -100 )
+position = Vector2( 336, -96 )
 script = ExtResource( 2 )
 
 [node name="Majo" type="AnimatedSprite" parent="KinematicBody2D"]
