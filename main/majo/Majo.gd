@@ -1,17 +1,8 @@
 extends RigidBody2D
 
-
-class Direction:
-	var _inner : int
-
-	func _init(inner : int):
-		_inner = inner
-
-	func equals(other : Direction) -> bool:
-		return _inner == other._inner
-
-var Left := Direction.new(0)
-var Right := Direction.new(1)
+const Direction = preload("res://main/Direction.gd")
+var Left := Direction.left()
+var Right := Direction.right()
 
 
 var direction := Right
