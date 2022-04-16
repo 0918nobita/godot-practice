@@ -14,8 +14,6 @@ var Left := Direction.new(0)
 var Right := Direction.new(1)
 
 
-const speed := 100
-
 var direction := Right
 var jumping := false
 
@@ -32,27 +30,39 @@ func stop_walking() -> void:
 		majo.playing = false
 
 
-func _physics_process(_delta):
-	var vel = get_linear_velocity()
-	if Input.is_action_pressed("ui_left"):
-		if direction.equals(Right):
-			majo.animation = "left"
-			direction = Left
-		set_linear_velocity(Vector2(-speed, vel.y))
+func face_to_left() -> void:
+	if direction.equals(Right):
+		majo.animation = "left"
+		direction = Left
+
+
+func face_to_right() -> void:
+	if direction.equals(Left):
+		majo.animation = "right"
+		direction = Right
+
+
+func _integrate_forces(_state) -> void:
+	if jumping:
+		return
+	var left_pressed := Input.is_action_pressed("ui_left")
+	var right_pressed := Input.is_action_pressed("ui_right")
+	if Input.is_action_just_pressed("space"):
+		var impulse := Vector2(0, -200)
+		apply_central_impulse(impulse)
+		stop_walking()
+		return
+	if left_pressed:
+		face_to_left()
+		set_applied_force(Vector2(-500, 0))
 		continue_walking()
-	elif Input.is_action_pressed("ui_right"):
-		if direction.equals(Left):
-			majo.animation = "right"
-			direction = Right
-		set_linear_velocity(Vector2(speed, vel.y))
+	elif right_pressed:
+		face_to_right()
+		set_applied_force(Vector2(500, 0))
 		continue_walking()
 	else:
+		set_applied_force(Vector2.ZERO)
 		stop_walking()
-
-	if Input.is_action_just_pressed("space") and not jumping:
-		linear_velocity = Vector2.ZERO
-		apply_central_impulse(Vector2(0, -400))
-		jumping = true
 
 
 func _on_RigidBody2D_body_entered(_body):
