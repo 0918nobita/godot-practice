@@ -1,17 +1,16 @@
 [gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://main/icon/Icon.gd" type="Script" id=1]
-[ext_resource path="res://main/majo/Majo.gd" type="Script" id=2]
 [ext_resource path="res://main/icon/icon.png" type="Texture" id=3]
 [ext_resource path="res://main/majo/majo.png" type="Texture" id=4]
 [ext_resource path="res://main/icon/shadermaterial.tres" type="Material" id=5]
 [ext_resource path="res://main/background.jpg" type="Texture" id=6]
 [ext_resource path="res://main/slide/shadermaterial.tres" type="Material" id=7]
 [ext_resource path="res://main/floor/shadermaterial.tres" type="Material" id=8]
+[ext_resource path="res://main/majo/MajoKinematicBody.gd" type="Script" id=9]
 
 [sub_resource type="PhysicsMaterial" id=15]
 friction = 0.7
-bounce = 0.05
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 128, 16 )
@@ -22,23 +21,8 @@ friction = 0.45
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 192, 32 )
 
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 16, 39.25 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 32, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 64, 32, 32, 32 )
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 16, 40 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
@@ -55,16 +39,31 @@ flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 64, 64, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 64, 32, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
-"loop": true,
-"name": "left",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "left",
 "speed": 5.0
 } ]
 
@@ -113,25 +112,17 @@ margin_top = -32.0
 margin_right = 192.0
 margin_bottom = 32.0
 
-[node name="MajoRigidBody" type="RigidBody2D" parent="."]
-position = Vector2( 432, -72 )
-mode = 2
-gravity_scale = 10.0
-contacts_reported = 2
-contact_monitor = true
-can_sleep = false
-script = ExtResource( 2 )
+[node name="MajoKinematicBody" type="KinematicBody2D" parent="."]
+position = Vector2( 432, -70 )
+script = ExtResource( 9 )
 
-[node name="MajoCollisionShape" type="CollisionShape2D" parent="MajoRigidBody"]
-position = Vector2( 0, -16 )
-shape = SubResource( 12 )
+[node name="MajoCollisionShape" type="CollisionShape2D" parent="MajoKinematicBody"]
+shape = SubResource( 16 )
 
-[node name="Majo" type="AnimatedSprite" parent="MajoRigidBody/MajoCollisionShape"]
+[node name="MajoView" type="AnimatedSprite" parent="MajoKinematicBody"]
 scale = Vector2( 2.5, 2.5 )
 frames = SubResource( 4 )
 animation = "right"
 __meta__ = {
 "_editor_description_": "ぴぽや倉庫 キャラクターチップ1 ハロウィンキャラクター"
 }
-
-[connection signal="body_entered" from="MajoRigidBody" to="MajoRigidBody" method="_on_RigidBody2D_body_entered"]
