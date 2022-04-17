@@ -24,21 +24,6 @@ extents = Vector2( 192, 32 )
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 16, 40 )
 
-[sub_resource type="AtlasTexture" id=8]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 32, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=10]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 64, 64, 32, 32 )
-
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 4 )
@@ -54,16 +39,31 @@ flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 64, 32, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 64, 64, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
-"loop": true,
-"name": "right",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "right",
 "speed": 5.0
 } ]
 
@@ -83,29 +83,32 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 script = ExtResource( 1 )
 
-[node name="SlideStaticBody" type="StaticBody2D" parent="."]
+[node name="Stage" type="Node2D" parent="."]
+position = Vector2( 0, -100 )
+
+[node name="SlideStaticBody" type="StaticBody2D" parent="Stage"]
 position = Vector2( 416, 336 )
 physics_material_override = SubResource( 15 )
 
-[node name="SlideCollisionShape" type="CollisionShape2D" parent="SlideStaticBody"]
+[node name="SlideCollisionShape" type="CollisionShape2D" parent="Stage/SlideStaticBody"]
 rotation = 0.553436
 shape = SubResource( 13 )
 
-[node name="SlideView" type="ColorRect" parent="SlideStaticBody/SlideCollisionShape"]
+[node name="SlideView" type="ColorRect" parent="Stage/SlideStaticBody/SlideCollisionShape"]
 material = ExtResource( 7 )
 margin_left = -128.0
 margin_top = -16.0
 margin_right = 141.0
 margin_bottom = 16.0
 
-[node name="FloorStaticBody" type="StaticBody2D" parent="."]
+[node name="FloorStaticBody" type="StaticBody2D" parent="Stage"]
 position = Vector2( 704, 416 )
 physics_material_override = SubResource( 14 )
 
-[node name="FloorCollisionShape" type="CollisionShape2D" parent="FloorStaticBody"]
+[node name="FloorCollisionShape" type="CollisionShape2D" parent="Stage/FloorStaticBody"]
 shape = SubResource( 11 )
 
-[node name="FloorView" type="ColorRect" parent="FloorStaticBody/FloorCollisionShape"]
+[node name="FloorView" type="ColorRect" parent="Stage/FloorStaticBody/FloorCollisionShape"]
 material = ExtResource( 8 )
 margin_left = -192.0
 margin_top = -32.0
