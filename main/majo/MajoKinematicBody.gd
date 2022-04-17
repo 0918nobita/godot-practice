@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-const Direction = preload("res://main/Direction.gd")
+const Direction = preload("res://main/majo/Direction.gd")
 var Left := Direction.left()
 var Right := Direction.right()
 
