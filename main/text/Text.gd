@@ -1,7 +1,8 @@
 extends RichTextLabel
 
 
-const Msgs = preload("res://main/text/Messages.gd")
+const dialog := preload("res://main/text/dialog.tres")
+const Msgs := preload("res://main/text/Messages.gd")
 
 
 const chars_per_sec := 20
@@ -11,7 +12,7 @@ var elapsed := 0.0
 var completed := false
 
 
-onready var msgs := Msgs.load_from_file("res://main/text/script.json")
+onready var msgs := dialog.load_as_message_array()
 
 
 func next_msg() -> void:
