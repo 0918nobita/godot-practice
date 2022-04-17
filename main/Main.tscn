@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://main/icon/Icon.gd" type="Script" id=1]
 [ext_resource path="res://main/icon/icon.png" type="Texture" id=3]
@@ -67,6 +67,13 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="DynamicFontData" id=17]
+font_path = "res://Mplus2-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=18]
+size = 22
+font_data = SubResource( 17 )
+
 [node name="Main" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
@@ -129,3 +136,22 @@ animation = "right"
 __meta__ = {
 "_editor_description_": "ぴぽや倉庫 キャラクターチップ1 ハロウィンキャラクター"
 }
+
+[node name="TextBackground" type="ColorRect" parent="."]
+modulate = Color( 0, 0, 0, 0.784314 )
+margin_top = 448.0
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="Text" type="RichTextLabel" parent="."]
+margin_left = 64.0
+margin_top = 472.0
+margin_right = 960.0
+margin_bottom = 576.0
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_fonts/normal_font = SubResource( 18 )
+bbcode_enabled = true
+bbcode_text = "Aキーで左、Dキーで右に移動できます。
+スペースキーでジャンプできます。"
+text = "Aキーで左、Dキーで右に移動できます。
+スペースキーでジャンプできます。"
