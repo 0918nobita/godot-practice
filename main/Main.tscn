@@ -72,6 +72,8 @@ font_path = "res://Mplus2-Medium.ttf"
 
 [sub_resource type="DynamicFont" id=18]
 size = 22
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 17 )
 
 [node name="Main" type="Node2D"]
@@ -138,7 +140,7 @@ __meta__ = {
 }
 
 [node name="TextBackground" type="ColorRect" parent="."]
-modulate = Color( 0, 0, 0, 0.784314 )
+modulate = Color( 0, 0, 0, 0.54902 )
 margin_top = 448.0
 margin_right = 1024.0
 margin_bottom = 600.0
