@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://main/icon/Icon.gd" type="Script" id=1]
 [ext_resource path="res://main/text/Text.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://main/slide/shadermaterial.tres" type="Material" id=7]
 [ext_resource path="res://main/floor/shadermaterial.tres" type="Material" id=8]
 [ext_resource path="res://main/majo/MajoKinematicBody.gd" type="Script" id=9]
+[ext_resource path="res://bgm Project/bgm.wav" type="AudioStream" id=10]
 [ext_resource path="res://main/Main.gd" type="Script" id=11]
 
 [sub_resource type="PhysicsMaterial" id=15]
@@ -214,6 +215,11 @@ focus_mode = 0
 custom_fonts/font = SubResource( 22 )
 enabled_focus_mode = 0
 text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -10.0
+autoplay = true
 
 [connection signal="button_up" from="DecrementButton" to="." method="_on_DecrementButton_button_up"]
 [connection signal="button_up" from="IncrementButton" to="." method="_on_IncrementButton_button_up"]
