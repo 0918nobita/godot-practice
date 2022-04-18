@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://main/icon/Icon.gd" type="Script" id=1]
 [ext_resource path="res://main/text/Text.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://main/slide/shadermaterial.tres" type="Material" id=7]
 [ext_resource path="res://main/floor/shadermaterial.tres" type="Material" id=8]
 [ext_resource path="res://main/majo/MajoKinematicBody.gd" type="Script" id=9]
+[ext_resource path="res://main/Counter.gd" type="Script" id=10]
 
 [sub_resource type="PhysicsMaterial" id=15]
 friction = 0.7
@@ -25,21 +26,6 @@ extents = Vector2( 192, 32 )
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 16, 40 )
 
-[sub_resource type="AtlasTexture" id=8]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 32, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=10]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 64, 64, 32, 32 )
-
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 4 )
@@ -55,16 +41,31 @@ flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 64, 32, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 64, 64, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
-"loop": true,
-"name": "right",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "right",
 "speed": 5.0
 } ]
 
@@ -76,6 +77,24 @@ size = 22
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 17 )
+
+[sub_resource type="DynamicFontData" id=21]
+font_path = "res://Mplus2-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=22]
+font_data = SubResource( 21 )
+
+[sub_resource type="DynamicFontData" id=23]
+font_path = "res://Mplus2-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=24]
+font_data = SubResource( 23 )
+
+[sub_resource type="DynamicFontData" id=19]
+font_path = "res://Mplus2-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=20]
+font_data = SubResource( 19 )
 
 [node name="Main" type="Node2D"]
 
@@ -155,3 +174,36 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_fonts/normal_font = SubResource( 18 )
 bbcode_enabled = true
 script = ExtResource( 2 )
+
+[node name="DecrementButton" type="Button" parent="."]
+margin_left = 64.0
+margin_top = 256.0
+margin_right = 128.0
+margin_bottom = 288.0
+focus_mode = 0
+custom_fonts/font = SubResource( 22 )
+enabled_focus_mode = 0
+text = "-1"
+
+[node name="Counter" type="Label" parent="."]
+margin_left = 128.0
+margin_top = 256.0
+margin_right = 192.0
+margin_bottom = 288.0
+custom_fonts/font = SubResource( 24 )
+align = 1
+valign = 1
+script = ExtResource( 10 )
+
+[node name="IncrementButton" type="Button" parent="."]
+margin_left = 192.0
+margin_top = 256.0
+margin_right = 256.0
+margin_bottom = 288.0
+focus_mode = 0
+custom_fonts/font = SubResource( 20 )
+enabled_focus_mode = 0
+text = "+1"
+
+[connection signal="button_up" from="DecrementButton" to="Counter" method="_on_DecrementButton_button_up"]
+[connection signal="button_up" from="IncrementButton" to="Counter" method="_on_IncrementButton_button_up"]
