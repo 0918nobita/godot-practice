@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://main/icon/Icon.gd" type="Script" id=1]
 [ext_resource path="res://main/text/Text.gd" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://main/slide/shadermaterial.tres" type="Material" id=7]
 [ext_resource path="res://main/floor/shadermaterial.tres" type="Material" id=8]
 [ext_resource path="res://main/majo/MajoKinematicBody.gd" type="Script" id=9]
-[ext_resource path="res://main/Counter.gd" type="Script" id=10]
 [ext_resource path="res://main/Main.gd" type="Script" id=11]
 
 [sub_resource type="PhysicsMaterial" id=15]
@@ -195,7 +194,6 @@ margin_bottom = 288.0
 custom_fonts/font = SubResource( 24 )
 align = 1
 valign = 1
-script = ExtResource( 10 )
 
 [node name="IncrementButton" type="Button" parent="."]
 margin_left = 160.0
@@ -217,6 +215,6 @@ custom_fonts/font = SubResource( 22 )
 enabled_focus_mode = 0
 text = "Quit"
 
-[connection signal="button_up" from="DecrementButton" to="Counter" method="_on_DecrementButton_button_up"]
-[connection signal="button_up" from="IncrementButton" to="Counter" method="_on_IncrementButton_button_up"]
+[connection signal="button_up" from="DecrementButton" to="." method="_on_DecrementButton_button_up"]
+[connection signal="button_up" from="IncrementButton" to="." method="_on_IncrementButton_button_up"]
 [connection signal="button_up" from="QuitButton" to="." method="_on_QuitButton_button_up"]
