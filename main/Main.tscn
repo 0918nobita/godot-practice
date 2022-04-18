@@ -178,9 +178,9 @@ bbcode_enabled = true
 script = ExtResource( 2 )
 
 [node name="DecrementButton" type="Button" parent="."]
-margin_left = 64.0
+margin_left = 32.0
 margin_top = 256.0
-margin_right = 128.0
+margin_right = 96.0
 margin_bottom = 288.0
 focus_mode = 0
 custom_fonts/font = SubResource( 22 )
@@ -188,9 +188,9 @@ enabled_focus_mode = 0
 text = "-1"
 
 [node name="Counter" type="Label" parent="."]
-margin_left = 128.0
+margin_left = 96.0
 margin_top = 256.0
-margin_right = 192.0
+margin_right = 160.0
 margin_bottom = 288.0
 custom_fonts/font = SubResource( 24 )
 align = 1
@@ -198,9 +198,9 @@ valign = 1
 script = ExtResource( 10 )
 
 [node name="IncrementButton" type="Button" parent="."]
-margin_left = 192.0
+margin_left = 160.0
 margin_top = 256.0
-margin_right = 256.0
+margin_right = 224.0
 margin_bottom = 288.0
 focus_mode = 0
 custom_fonts/font = SubResource( 20 )
