@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://main/icon/Icon.gd" type="Script" id=1]
 [ext_resource path="res://main/text/Text.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://main/floor/shadermaterial.tres" type="Material" id=8]
 [ext_resource path="res://main/majo/MajoKinematicBody.gd" type="Script" id=9]
 [ext_resource path="res://main/Counter.gd" type="Script" id=10]
+[ext_resource path="res://main/Main.gd" type="Script" id=11]
 
 [sub_resource type="PhysicsMaterial" id=15]
 friction = 0.7
@@ -97,6 +98,7 @@ font_path = "res://Mplus2-Medium.ttf"
 font_data = SubResource( 19 )
 
 [node name="Main" type="Node2D"]
+script = ExtResource( 11 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 512, 216 )
@@ -205,5 +207,16 @@ custom_fonts/font = SubResource( 20 )
 enabled_focus_mode = 0
 text = "+1"
 
+[node name="QuitButton" type="Button" parent="."]
+margin_left = 928.0
+margin_top = 32.0
+margin_right = 992.0
+margin_bottom = 64.0
+focus_mode = 0
+custom_fonts/font = SubResource( 22 )
+enabled_focus_mode = 0
+text = "Quit"
+
 [connection signal="button_up" from="DecrementButton" to="Counter" method="_on_DecrementButton_button_up"]
 [connection signal="button_up" from="IncrementButton" to="Counter" method="_on_IncrementButton_button_up"]
+[connection signal="button_up" from="QuitButton" to="." method="_on_QuitButton_button_up"]
