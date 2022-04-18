@@ -1,6 +1,9 @@
 extends Node2D
 
 
+const savedata_path := "user://savedata"
+
+
 onready var counter := $Counter as Label
 
 
@@ -14,11 +17,14 @@ func set_count(val : int) -> void:
 
 func load_count() -> void:
 	var file := File.new()
-	var err := file.open("user://savedata", File.READ)
-	if err == OK:
-		set_count(file.get_32())
-	else:
+	if not file.file_exists(savedata_path):
 		set_count(0)
+		return
+	var err := file.open(savedata_path, File.READ)
+	if err != OK:
+		push_error("Failed to open " + savedata_path + " in read mode")
+	else:
+		set_count(file.get_32())
 	file.close()
 
 
@@ -36,9 +42,9 @@ func _on_IncrementButton_button_up():
 
 func save_count() -> void:
 	var file := File.new()
-	var err := file.open("user://savedata", File.WRITE)
+	var err := file.open(savedata_path, File.WRITE)
 	if err != OK:
-		push_error("Failed to open file")
+		push_error("Failed to open " + savedata_path + " in write mode")
 	file.store_32(count)
 	file.close()
 
