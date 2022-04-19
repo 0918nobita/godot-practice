@@ -30,11 +30,20 @@ func load_count() -> void:
 	file.close()
 
 
+func audio_fade_in() -> void:
+	audio_player.play()
+	var res := tween.interpolate_property(audio_player, "volume_db", -80, -10, 1.0)
+	if not res:
+		push_error("Failed to configure tween of audio player")
+		return
+	res = tween.start()
+	if not res:
+		push_error("Failed to start tween of audio player")
+
+
 func _ready() -> void:
 	load_count()
-	audio_player.play()
-	tween.interpolate_property(audio_player, "volume_db", -80, -10, 1.0)
-	tween.start()
+	audio_fade_in()
 
 
 func _on_DecrementButton_button_up():
