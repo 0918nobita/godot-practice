@@ -5,6 +5,8 @@ const savedata_path := "user://savedata"
 
 
 onready var counter := $Counter as Label
+onready var audio_player := $AudioStreamPlayer as AudioStreamPlayer
+onready var tween := $Tween as Tween
 
 
 var count := 0 setget set_count
@@ -30,6 +32,9 @@ func load_count() -> void:
 
 func _ready() -> void:
 	load_count()
+	audio_player.play()
+	tween.interpolate_property(audio_player, "volume_db", -80, -10, 1.0)
+	tween.start()
 
 
 func _on_DecrementButton_button_up():

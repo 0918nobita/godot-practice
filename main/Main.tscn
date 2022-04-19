@@ -218,8 +218,9 @@ text = "Quit"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
-volume_db = -10.0
-autoplay = true
+volume_db = -80.0
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="button_up" from="DecrementButton" to="." method="_on_DecrementButton_button_up"]
 [connection signal="button_up" from="IncrementButton" to="." method="_on_IncrementButton_button_up"]
