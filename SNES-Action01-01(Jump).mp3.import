@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SNES-Action01-01(Jump).mp3-22c9a462ea97316173ee89b2779d3154.mp3str"
+
+[deps]
+
+source_file="res://SNES-Action01-01(Jump).mp3"
+dest_files=[ "res://.import/SNES-Action01-01(Jump).mp3-22c9a462ea97316173ee89b2779d3154.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

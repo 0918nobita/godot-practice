@@ -13,3 +13,9 @@ Godot v3.4.4 (stable) で開発しています。
 SIL Open Font License 1.1
 
 2021 The M+ FONTS Project Authors (https://github.com/coz-m/MPLUS_FONTS)
+
+### アクションゲーム用セット SNES アクション01
+
+``/SNES-Action01-01(Jump).mp3``
+
+2012-2022 OtoLogic (https://otologic.jp/free/license.html)

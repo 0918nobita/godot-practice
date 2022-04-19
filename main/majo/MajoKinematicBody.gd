@@ -15,6 +15,7 @@ var jumping := false
 var velocity := Vector2.ZERO
 
 onready var majo := $MajoView as AnimatedSprite
+onready var audio := $AudioStreamPlayer2D as AudioStreamPlayer2D
 
 
 func continue_walking() -> void:
@@ -51,6 +52,7 @@ func _physics_process(delta : float) -> void:
 	var rightPressed := Input.is_action_pressed("ui_right")
 
 	if not jumping and spacePressed:
+		audio.playing = true
 		velocity.y = jump_speed
 		jumping = true
 
