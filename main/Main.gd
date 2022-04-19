@@ -34,7 +34,7 @@ func load_count() -> void:
 
 func audio_fade_in() -> void:
 	audio_player.play()
-	var res := tween.interpolate_property(audio_player, "volume_db", -80, -7, 0.5)
+	var res := tween.interpolate_property(audio_player, "volume_db", min_vol, max_vol, 0.5)
 	if not res:
 		push_error("Failed to configure tween of audio player")
 		return
