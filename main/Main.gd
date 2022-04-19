@@ -2,6 +2,8 @@ extends Node2D
 
 
 const savedata_path := "user://savedata"
+const min_vol := -80
+const max_vol := -7
 
 
 onready var counter := $Counter as Label
@@ -66,3 +68,7 @@ func save_count() -> void:
 func _on_QuitButton_button_up():
 	save_count()
 	get_tree().quit()
+
+
+func _on_HSlider_value_changed(value):
+	audio_player.volume_db = abs(max_vol - min_vol) * (value / 100) + min_vol
